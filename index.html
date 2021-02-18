@@ -20,6 +20,9 @@
     <title>Team Generator</title>
   </head>
   <body class="bg-dark text-light">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href="#">Navbar</a>
+    </nav>
     <!--
     WELCOME TO THE STRIVE TEAM GENERATOR!
 
@@ -83,6 +86,15 @@
 
     <div class="container my-5">
       <div class="row my-5 bg-light text-dark" id="teams-div"></div>
+      <input type="button" value="Remove Player" onclick="removePlayer()" />
+    </div>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-4">
+          <button onclick="reset()">Reset</button>
+        </div>
+      </div>
     </div>
 
     <!-- Optional JavaScript; choose one of the two! -->
@@ -108,21 +120,27 @@
         return Math.floor(Math.random() * max + 1);
       }
 
+      function removePlayer() {}
+
       function assignPlayer() {
         if (ulList.children.length > 0) {
           let random = randomNumber(4);
-          let nameOfAssigned = ulList.lastChild.innerText;
-          console.log(nameOfAssigned);
-          let lastNameRemoved = ulList.removeChild(ulList.lastChild);
-          // console.log(nameAssigned);
-          // let randomTeam = document.getElementById(`team-${random}`);
-          // console.log(randomTeam);
           ulOfTeam = document.getElementById(`ul-${random}`);
-          let playerAssigned = document.createElement("li");
+          if (ulOfTeam.children.length < 2) {
+            let nameOfAssigned = ulList.lastChild.innerText;
 
-          ulOfTeam.appendChild(playerAssigned);
-          playerAssigned.innerText = nameOfAssigned;
-          randomTeam.appendChild(ulOfTeam);
+            let lastNameRemoved = ulList.removeChild(ulList.lastChild);
+            // console.log(nameAssigned);
+            // let randomTeam = document.getElementById(`team-${random}`);
+            // console.log(randomTeam);
+
+            let playerAssigned = document.createElement("li");
+
+            ulOfTeam.appendChild(playerAssigned);
+            playerAssigned.innerText = nameOfAssigned;
+
+            randomTeam.appendChild(ulOfTeam);
+          }
         }
       }
 
@@ -161,6 +179,14 @@
           ulList.appendChild(listElement);
           nameInput.value = "";
         }
+      }
+
+      function reset(params) {
+        let allUls = document.querySelectorAll("ul");
+        for (let i = 0; i < allUls.length; i++) {
+          allUls[i].innerHTML = "";
+        }
+        nameInput.value = "";
       }
     </script>
 
