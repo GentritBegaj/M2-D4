@@ -105,22 +105,25 @@
       let numberOfTeams = document.getElementById("quantity");
 
       function randomNumber(max) {
-        return Math.floor(Math.random() * max) + 1;
+        return Math.floor(Math.random() * max + 1);
       }
 
       function assignPlayer() {
-        let random = randomNumber(4);
-        let nameOfAssigned = ulList.lastChild.innerText;
-        console.log(nameOfAssigned);
-        let lastNameRemoved = ulList.removeChild(ulList.lastChild);
-        // console.log(nameAssigned);
-        // let randomTeam = document.getElementById(`team-${random}`);
-        // console.log(randomTeam);
-        ulOfTeam = document.getElementById(`ul-${random}`);
-        let playerAssigned = document.createElement("li");
-        playerAssigned.innerHTML = nameOfAssigned;
-        ulOfTeam.appendChild(playerAssigned);
-        randomTeam.appendChild(ulOfTeam);
+        if (ulList.children.length > 0) {
+          let random = randomNumber(4);
+          let nameOfAssigned = ulList.lastChild.innerText;
+          console.log(nameOfAssigned);
+          let lastNameRemoved = ulList.removeChild(ulList.lastChild);
+          // console.log(nameAssigned);
+          // let randomTeam = document.getElementById(`team-${random}`);
+          // console.log(randomTeam);
+          ulOfTeam = document.getElementById(`ul-${random}`);
+          let playerAssigned = document.createElement("li");
+
+          ulOfTeam.appendChild(playerAssigned);
+          playerAssigned.innerText = nameOfAssigned;
+          randomTeam.appendChild(ulOfTeam);
+        }
       }
 
       function addTeams() {
